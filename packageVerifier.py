@@ -1,6 +1,6 @@
 from openai import AzureOpenAI
 
-
+#API Call to OpenAI
 gpt4_client = AzureOpenAI(
   #Enter Your Credentials here
   azure_endpoint = "endpoint", 
@@ -8,6 +8,7 @@ gpt4_client = AzureOpenAI(
   api_version= "version"
 )
 
+#GPT4 function that returns output
 def get_response(user_prompt):
     response = gpt4_client.chat.completions.create(
                 #Enter your model's name
@@ -39,13 +40,13 @@ st.markdown(
 
     .main{
         background-color: #90ee90;
-        background-image: url('C:\\Users\\2106624\\Downloads\\alkov160700009.jpg')
         backgound-size: cover;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 # Use the custom class for the title
 st.markdown('<h1 class="custom-title">Welcome to PyVerify!</h1>', unsafe_allow_html=True)
 
@@ -58,6 +59,7 @@ user_input=st.text_input(placeholder='Enter your package name eg. openpyxl',labe
 #UI Search button
 if user_input!="":
     if st.button('Verify'):
+        #Pre-written prompt below      
         user_prompt=f"Is the below package supported the most commanly used package? If No return a comma separated list of alternatives :{user_input}"
         ui_op=get_response(user_prompt)
         st.markdown(f"**{ui_op}**")
